@@ -6,6 +6,7 @@ import 'reviewbody.dart';
 import 'reviewtitle.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:uuid/uuid.dart';
 
 class CreateNewReviewPage extends StatelessWidget {
   const CreateNewReviewPage({super.key});
@@ -56,26 +57,25 @@ class _SubmitButtonImplementation extends State<SubmitButton> {
     );
   }
 
-  Future<Review> submitReview(String title, String author, String reviewer,
+  Future<void> submitReview(String title, String author, String reviewer,
       String reviewtitle, String reviewtext) async {
     final response =
         await http.post(Uri.parse('https://api.restpoint.io/api/book'),
             headers: <String, String>{
               'Content-Type': 'application/json',
-              'x-endpoint-key': '84afd7c94c40453bacee7e66833638d5'
+              'x-endpoint-key': '84afd7c94c40453bacee7e66833638d5',
+              'accept': 'application/json'
             },
             body: jsonEncode(<String, String>{
+              "id": const Uuid().v8(),
               "title": title,
               "author": author,
               "reviewer": reviewer,
               "reviewtitle": reviewtitle,
               "reviewtext": reviewtext
             }));
-
-    if (response.statusCode == 201) {
-      return Review.fromJson(jsonDecode(response.body) as Map<String, String>);
-    } else {
-      throw Exception('Failed to create review');
+    if (response.statusCode == 200) {
+      print('return a widget notifying that the request is successful ');
     }
   }
 }
