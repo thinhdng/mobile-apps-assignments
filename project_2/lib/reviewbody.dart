@@ -1,22 +1,28 @@
+// ignore_for_file: override_on_non_overriding_member
+
 import 'package:flutter/material.dart';
 
 class ReviewBodyInput extends StatefulWidget {
   const ReviewBodyInput({super.key});
-
+  static TextEditingController mycontroller = TextEditingController();
   @override
   State<ReviewBodyInput> createState() => _ReviewBodyInputImplementation();
 }
 
 class _ReviewBodyInputImplementation extends State<ReviewBodyInput> {
-  final _reviewbodytext = '';
+  @override
+  void clear() {
+    ReviewBodyInput.mycontroller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const TextField(
-      keyboardType: TextInputType.multiline,
-      maxLines: null,
-      decoration: InputDecoration(
-          border: OutlineInputBorder(), hintText: 'Review in details'),
-    );
+    return TextField(
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+        decoration: const InputDecoration(
+            border: OutlineInputBorder(), hintText: 'Review in details'),
+        controller: ReviewBodyInput.mycontroller);
   }
 }
