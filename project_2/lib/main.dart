@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
                                     const CreateNewReviewPage()));
                       },
                       child: const Icon(Icons.create)),
-                  body: const Text('add list of reviews here'),
+                  body: const Text(''),
                 )));
   }
 }
