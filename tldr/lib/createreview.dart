@@ -58,10 +58,10 @@ class _SubmitButtonImplementation extends State<SubmitButton> {
     );
   }
 
-  Future<Review> submitReview(String title, String author, String reviewer,
+  Future<void> submitReview(String title, String author, String reviewer,
       String reviewtitle, String reviewtext) async {
     final response =
-        await http.post(Uri.parse('https://api.restpoint.io/api/book/'),
+        await http.post(Uri.parse('https://api.restpoint.io/api/book'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'x-endpoint-key': '84afd7c94c40453bacee7e66833638d5'
@@ -75,14 +75,15 @@ class _SubmitButtonImplementation extends State<SubmitButton> {
             }));
 
     if (response.statusCode == 201) {
-      return Review.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+      //return Review.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+      print('post');
     } else {
       throw Exception('Failed to create review');
     }
   }
 }
 
-class Review {
+/*class Review {
   final String bookauthor;
   final String booktitle;
   final String reviewauthor;
@@ -95,7 +96,7 @@ class Review {
       required this.reviewbody,
       required this.reviewtitle});
 
-  factory Review.fromJson(Map<String, dynamic> json) {
+  factory Review.fromJson(Map<String, String> json) {
     return switch (json) {
       {
         "title": String booktitle,
@@ -113,4 +114,4 @@ class Review {
       _ => throw const FormatException('Failed to load review')
     };
   }
-}
+}*/
