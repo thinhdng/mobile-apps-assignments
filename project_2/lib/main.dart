@@ -60,50 +60,66 @@ class _DisplayReviewImplementation extends State<DisplayReviews> {
   @override
   Widget build(BuildContext context) {
     fetchReview();
-    return ListView.builder(
-        itemCount: _reviewList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return TextButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Scaffold(
-                            appBar:
-                                AppBar(title: const Text('Viewing a review')),
-                            body: Column(
-                              children: [
-                                Text(
-                                  'Book: ${_reviewList[index].title}',
-                                  style: const TextStyle(fontSize: 25),
+    return Hero(
+      tag: "viewingareview",
+      child: ListView.builder(
+          itemCount: _reviewList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Hero(
+                              tag: "viewingareview",
+                              child: Scaffold(
+                                appBar: AppBar(
+                                    title: const Text('Viewing a review')),
+                                body: Column(
+                                  children: [
+                                    Center(
+                                      child: Text(
+                                        'Book: ${_reviewList[index].title}',
+                                        style: const TextStyle(fontSize: 25),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Author: ${_reviewList[index].author} ',
+                                        style: const TextStyle(fontSize: 25),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Reviewer: ${_reviewList[index].reviewer}',
+                                        style: const TextStyle(fontSize: 25),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Review Title: ${_reviewList[index].reviewtitle} ',
+                                        style: const TextStyle(fontSize: 25),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Review: ${_reviewList[index].reviewtext}',
+                                        style: const TextStyle(fontSize: 25),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  'Author: ${_reviewList[index].author} ',
-                                  style: const TextStyle(fontSize: 25),
-                                ),
-                                Text(
-                                  'Reviewer: ${_reviewList[index].reviewer}',
-                                  style: const TextStyle(fontSize: 25),
-                                ),
-                                Text(
-                                  'Review Title: ${_reviewList[index].reviewtitle} ',
-                                  style: const TextStyle(fontSize: 25),
-                                ),
-                                Text(
-                                  'Review: ${_reviewList[index].reviewtext}',
-                                  style: const TextStyle(fontSize: 25),
-                                ),
-                              ],
-                            ),
-                          )));
-            },
-            style: TextButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
-              padding: const EdgeInsets.all(16),
-            ),
-            child: Text('Review of: ${_reviewList[index].title}'),
-          );
-        });
+                              ),
+                            )));
+              },
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 20),
+                padding: const EdgeInsets.all(16),
+              ),
+              child: Text('Review of: ${_reviewList[index].title}'),
+            );
+          }),
+    );
   }
 }
 
