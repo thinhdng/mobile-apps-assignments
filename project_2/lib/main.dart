@@ -48,7 +48,7 @@ class _DisplayReviewImplementation extends State<DisplayReviews> {
         .get(Uri.parse('https://api.restpoint.io/api/book'), headers: {
       "x-endpoint-key": "84afd7c94c40453bacee7e66833638d5",
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      'accept': 'application/json',
     });
     final List<Review> reviewList = (json.decode(response.body)['data'] as List)
         .map((data) => Review.fromJson(data))
@@ -64,7 +64,39 @@ class _DisplayReviewImplementation extends State<DisplayReviews> {
         itemCount: _reviewList.length,
         itemBuilder: (BuildContext context, int index) {
           return TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Scaffold(
+                            appBar:
+                                AppBar(title: const Text('Viewing a review')),
+                            body: Column(
+                              children: [
+                                Text(
+                                  'Book: ${_reviewList[index].title}',
+                                  style: const TextStyle(fontSize: 25),
+                                ),
+                                Text(
+                                  'Author: ${_reviewList[index].author} ',
+                                  style: const TextStyle(fontSize: 25),
+                                ),
+                                Text(
+                                  'Reviewer: ${_reviewList[index].reviewer}',
+                                  style: const TextStyle(fontSize: 25),
+                                ),
+                                Text(
+                                  'Review Title: ${_reviewList[index].reviewtitle} ',
+                                  style: const TextStyle(fontSize: 25),
+                                ),
+                                Text(
+                                  'Review: ${_reviewList[index].reviewtext}',
+                                  style: const TextStyle(fontSize: 25),
+                                ),
+                              ],
+                            ),
+                          )));
+            },
             style: TextButton.styleFrom(
               textStyle: const TextStyle(fontSize: 20),
               padding: const EdgeInsets.all(16),

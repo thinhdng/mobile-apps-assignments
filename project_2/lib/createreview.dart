@@ -17,20 +17,9 @@ class CreateNewReviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: "newreviewtag",
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('TLDR: Book Reviews'),
-        ),
-        body: ListView(children: const [
-          SubmitButton(),
-          BookTitleInput(),
-          BookAuthorInput(),
-          ReviewAuthorInput(),
-          ReviewTitleInput(),
-          ReviewBodyInput(),
-        ]),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Create a new review:'),
       ),
     );
   }
