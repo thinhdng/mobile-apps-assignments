@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.monitor_weight),
-            label: 'Tracker',
+            label: 'Weight Tracker',
           )
         ],
         currentIndex: _selectedIndex,

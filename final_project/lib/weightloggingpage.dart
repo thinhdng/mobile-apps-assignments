@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'createrecord.dart';
 
 class WeightLoggingPage extends StatefulWidget {
   const WeightLoggingPage({super.key});
@@ -8,28 +9,39 @@ class WeightLoggingPage extends StatefulWidget {
   State<WeightLoggingPage> createState() => _WeightLoggingPageImplementation();
 }
 
-List<FlSpot> chartData = [
-  const FlSpot(0, 1),
-  const FlSpot(1, 3),
-  const FlSpot(2, 10),
-  const FlSpot(3, 7),
-  const FlSpot(4, 12),
-  const FlSpot(5, 13),
-  const FlSpot(6, 17),
-  const FlSpot(7, 15),
-  const FlSpot(8, 20),
-];
-
 class _WeightLoggingPageImplementation extends State<WeightLoggingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Weight Tracker'),
+      appBar: AppBar(
+        title: const Text('Weight Tracker'),
+      ),
+      body: Scaffold(
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.blue,
+            shape: const CircleBorder(),
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // ignore: prefer_const_constructors
+              CreateRecord();
+            }),
+        body: SfCartesianChart(
+          primaryXAxis: CategoryAxis(),
+          primaryYAxis: NumericAxis(),
+          series: <ChartSeries<DateAndWeight, String>>[
+            LineSeries<DateAndWeight, String>(
+              dataSource: chartData,
+              dataLabelSettings: const DataLabelSettings(isVisible: true),
+              markerSettings: const MarkerSettings(isVisible: true),
+              xValueMapper: (DateAndWeight data, _) => data.date,
+              yValueMapper: (DateAndWeight data, _) => data.weight,
+            )
+          ],
         ),
-        body: LineChart(LineChartData(
-          borderData: FlBorderData(show: false),
-          lineBarsData: [LineChartBarData(spots: chartData)],
-        )));
+      ),
+    );
   }
 }
