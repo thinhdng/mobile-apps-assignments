@@ -1,8 +1,11 @@
 // Import necessary packages
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
+import 'package:final_project/weightloggingpage.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 // MainApp Class
@@ -11,6 +14,8 @@ void main() {
 // specific to the MaterialApp use.
 // Defined a home screen
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,6 +30,8 @@ class MyApp extends StatelessWidget {
 
 // Homescreen state stuff
 class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
   final List<Map<String, String>> links = [
@@ -39,8 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // List of pages for Nutrition and Fitness
   final List<Widget> _pages = [
-    NutritionPage(),
-    FitnessPage(),
+    const NutritionPage(),
+    const FitnessPage(),
+    const WeightLoggingPage(),
   ];
 
   // App Bar Stuff
@@ -50,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AD0N1S Fitness'),
+        title: const Text('AD0N1S Fitness'),
       ),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -63,6 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.fitness_center),
             label: 'Fitness',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.monitor_weight),
+            label: 'Weight Tracker',
+          )
         ],
         currentIndex: _selectedIndex,
         onTap: _onTabTapped,
@@ -79,24 +91,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
 // Start Nutrition Page Stuff
 class NutritionInformationTab extends StatelessWidget {
+  const NutritionInformationTab({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Nutrition Information Tab Content'),
     );
   }
 }
 
 class NutritionLogTab extends StatelessWidget {
+  const NutritionLogTab({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Nutrition Log Tab Content'),
     );
   }
 }
 
 class NutritionPage extends StatefulWidget {
+  const NutritionPage({super.key});
+
   @override
   _NutritionPageState createState() => _NutritionPageState();
 }
@@ -115,10 +133,10 @@ class _NutritionPageState extends State<NutritionPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nutrition'),
+        title: const Text('Nutrition'),
         bottom: TabBar(
           controller: _tabController,
-          tabs: [
+          tabs: const [
             Tab(text: 'Information'),
             Tab(text: 'Log'),
           ],
@@ -126,7 +144,7 @@ class _NutritionPageState extends State<NutritionPage>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
+        children: const [
           // Nutrition Information Tab
           NutritionInformationTab(),
 
@@ -146,24 +164,30 @@ class _NutritionPageState extends State<NutritionPage>
 
 // Start Fitness Page Stuff
 class FitnessInformationTab extends StatelessWidget {
+  const FitnessInformationTab({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Fitness Information Tab Content'),
     );
   }
 }
 
 class FitnessWorkoutsTab extends StatelessWidget {
+  const FitnessWorkoutsTab({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Fitness Workouts Tab Content'),
     );
   }
 }
 
 class FitnessPage extends StatefulWidget {
+  const FitnessPage({super.key});
+
   @override
   _FitnessPageState createState() => _FitnessPageState();
 }
@@ -182,10 +206,10 @@ class _FitnessPageState extends State<FitnessPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fitness'),
+        title: const Text('Fitness'),
         bottom: TabBar(
           controller: _tabController,
-          tabs: [
+          tabs: const [
             Tab(text: 'Information'),
             Tab(text: 'Workouts'),
           ],
@@ -193,7 +217,7 @@ class _FitnessPageState extends State<FitnessPage>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
+        children: const [
           // Fitness Information Tab
           FitnessInformationTab(),
 
